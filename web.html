@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<head>
+
+  <!-- Montserrat normal font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  <!-- Lato Heading font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+  <!-- Cinzel Heading Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+
+  <!-- Roboto timeline font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script> 
+  
+  <script>
+    async function load() {
+      const model = await tf.loadLayersModel('Users/siddhant/Documents/Python/Montyhacks/model_js/model.json');
+      return model;
+    };
+
+    function predict(model) {
+      // code to connect to the <input> given value will go here (just not yet)
+      const temp1 = document.getElementById('temp').value
+      const pressure1 = document.getElementById('pressure').value
+      const humidity1 = document.getElementById('humidity').value
+      const wind_speed1 = document.getElementById('wind_speed').value
+      const rain_1h1 = document.getElementById('rain_1h').value
+      const rain_3h1 = document.getElementById('rain_3h').value
+      const snow_3h1 = document.getElementById('snow_3h').value
+      const clouds_all1 = document.getElementById('clouds_all').value
+
+
+      const temp = ([parseInt(temp1)]);
+      const pressure = ([parseInt(pressure1)]);
+      const humidity = ([parseInt(humidity1)]);
+      const wind_speed = ([parseInt(wind_speed1)]);
+      const rain_1h = ([parseInt(rain_1h1)]);
+      const rain_3h = ([parseInt(rain_3h1)]);
+      const snow_3h = ([parseInt(snow_3h1)]);
+      const clouds_all = ([parseInt(clouds_all1)]);
+
+      // now lets make the prediction
+      model.then(model => {
+        let result = model.predict(tf.tensor(temp,pressure,humidity,wind_speed,rain_1h,rain_3h,snow_3h,clouds_all));  // make prediction
+        alert(result);  // creates pop-up
+      });
+    };
+
+    const model = load();
+  </script>
+
+  <title>EnergyForecast.ai</title>
+</head>
+
+<body>
+  <main id="main">
+    <article class="article-container">
+
+      <div class="img-title">
+          <div class="title-line">
+            <h1 class="title-line" id="title">Energy Forecast</h1>
+            <h2 class="title-line" id="info">An AI driven tool to predict energy production based on weather conditions.</h2>
+          </div>
+      </div>
+
+      <div id="product-description">
+        <p id="product-description-paragraph">We offer an innovative solution to the issue of costly energy production mechanisms generating low outputs due to weather conditions. Our product analyzes the weather conditions and predicts the amount of renewable energy generated, as well as the approximate cost of this production. As a result, our program encourages more effective budgeting in order to produce a greater amount of renewable energy.</p>
+      </div>
+
+      <div class="image-container" id="image1">
+      </div>
+
+      <div id="product-test">
+        <p id="product-test-words">Try our product out here!</p>
+        <form class="form">
+          <input type="text" id="temp" name="temp" placeholder="Temperature (K)" required><br><br>
+          <input type="text" id="pressure" name="pressure" placeholder="Pressure" required><br><br>
+          <input type="text" id="humidity" name="humidity" placeholder="Humidity" required><br><br>
+          <input type="text" id="wind_speed" name="wind_speed" placeholder="Wind Speed" required><br><br>
+          <input type="text" id="rain_1h" name="rain_1h" placeholder="Rain in the Last 1 Hour" required><br><br>
+          <input type="text" id="rain_3h" name="rain_3h" placeholder="Rain in the Last 3 Hours" required><br><br>
+          <input type="text" id="snow_3h" name="snow_3h" placeholder="Snow in the Last 3 Hours" required><br><br>
+          <input type="text" id="clouds_all" name="clouds_all" placeholder="Clouds in the Last 3 Hours" required><br><br>\
+          <button class="button" onclick="predict(model)">Predict</button>
+        </form>
+      </div>
+
+      <div class="image-container" id="image2">
+      </div>
+      
+      <div id="how-it-works">
+        <p id="how-it-works-paragraph">Our product works through a neural network run in Tensorflow. Using both weather data and energy generation, we identified the renewable energy generated and the price point for the energy output.</p>
+      </div>
+
+      <div class="image-container" id="image3">
+      </div>
+
+
+    </article>
+  </main>
+</body>
+<footer>
+  <div class="footer-holder">
+    <p class="footer-text">Created by Siddhant Vashist and Pragya Singh.</p>
+    <p class="footer-text" >2022</p>
+  </div>
+</footer>
