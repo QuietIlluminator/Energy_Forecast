@@ -1,0 +1,9 @@
+Please install the following libraries on your local terminal, preferably in a virtual environment: 
+
+   pip install Tensorflow
+   
+   pip install numpy
+   
+   pip install pandas
+   
+   pip install tensorflowjs
