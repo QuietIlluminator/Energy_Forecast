@@ -1,6 +1,6 @@
 # Energy_Forecast
 
-This project utilizes fixed datasets from the weather and energy kaggle datasets. The weather dataset is input data and the energy dataset is the labels. The edited versions of the datasets (the ones used for the neural network) are added to the project as Weatherdata.csv and Energydata.csv
+This project utilizes fixed datasets from the weather and energy kaggle datasets. The weather dataset is input data and the energy dataset is the labels. The edited versions of the datasets (the ones used for the neural network) are added to the project as Weatherdata.csv and Energydata.csv. Please download them into a local filepath to use it in your neural network.
 
 Before any other piece of code is run, make sure to install the python libraries listed in the pylibraries.txt of our project.
 
