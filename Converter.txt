@@ -1,0 +1,8 @@
+To convert the neural network you have saved from an h5 file to a json file, please input the following code into your local terminal
+
+tensorflowjs_converter \
+     --input_format=keras \
+     model_py/model.h5 \
+     model_js
+     
+If you have saved the neural network as anything else other than model_py/model.h5, please rename the filepath in the code to the filepath you've chosen.
