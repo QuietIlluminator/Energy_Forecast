@@ -1,13 +1,9 @@
 # Energy_Forecast
 
-This project utilizes fixed datasets from the weather and energy kaggle datasets. The weather dataset is input data and the energy dataset is the labels. The edited versions of the datasets (the ones used for the neural network) are added to the project
+This project utilizes fixed datasets from the weather and energy kaggle datasets. The weather dataset is input data and the energy dataset is the labels. The edited versions of the datasets (the ones used for the neural network) are added to the project.
 
-Python libraries needed to be installed:
-   pip install Tensorflow
-   pip install numpy
-   pip install pandas
-   pip install tensorflowjs
-   
+Before any other piece of code is run, make sure to install the python libraries listed in the pylibraries.txt of our project.
+
 The first step in the project is to create and train the neural network. This can be done by running the neural network code linked into the project. 
 After the neural network is created, it will be saved as a .h5 file in your local filepath. Follow the instructions listed on the github to convert it into a json file.
 
