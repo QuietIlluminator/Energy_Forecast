@@ -24,16 +24,18 @@
 
   <link rel="stylesheet" href="styles.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script> 
-  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+
   <script>
     async function load() {
-      const model = await tf.loadLayersModel('Users/siddhant/Documents/Python/Montyhacks/model_js/model.json');
+      const model = await tf.loadLayersModel('https://raw.githubusercontent.com/CodeWars19/Energy_Forecast/main/model_js/model.json');
       return model;
     };
 
     function predict(model) {
       // code to connect to the <input> given value will go here (just not yet)
+
       const temp1 = document.getElementById('temp').value
       const pressure1 = document.getElementById('pressure').value
       const humidity1 = document.getElementById('humidity').value
@@ -44,7 +46,7 @@
       const clouds_all1 = document.getElementById('clouds_all').value
 
 
-      const temp = ([parseInt(temp1)]);
+      const temp = (parseInt(temp1));
       const pressure = ([parseInt(pressure1)]);
       const humidity = ([parseInt(humidity1)]);
       const wind_speed = ([parseInt(wind_speed1)]);
@@ -53,10 +55,13 @@
       const snow_3h = ([parseInt(snow_3h1)]);
       const clouds_all = ([parseInt(clouds_all1)]);
 
-      // now lets make the prediction
+      //alert(((tf.tensor([temp, pressure, humidity, wind_speed, rain_1h, rain_3h, snow_3h, clouds_all]))))
+
+      // now lets make the prediction 
       model.then(model => {
-        let result = model.predict(tf.tensor(temp,pressure,humidity,wind_speed,rain_1h,rain_3h,snow_3h,clouds_all));  // make prediction
-        alert(result);  // creates pop-up
+        let result = model.predict(tf.tensor([[temp, pressure, humidity, wind_speed, rain_1h, rain_3h, snow_3h, clouds_all]]));  // make prediction
+        //alert(result); creates pop-up
+        document.getElementById("answer").value = result;
       });
     };
 
@@ -71,21 +76,27 @@
     <article class="article-container">
 
       <div class="img-title">
-          <div class="title-line">
-            <h1 class="title-line" id="title">Energy Forecast</h1>
-            <h2 class="title-line" id="info">An AI driven tool to predict energy production based on weather conditions.</h2>
-          </div>
+        <div class="title-line">
+          <h1 class="title-line" id="title">Energy Forecast</h1>
+          <h2 class="title-line" id="info">An AI driven tool to predict energy production based on weather conditions.
+          </h2>
+        </div>
       </div>
 
       <div id="product-description">
-        <p id="product-description-paragraph">We offer an innovative solution to the issue of costly energy production mechanisms generating low outputs due to weather conditions. Our product analyzes the weather conditions and predicts the amount of renewable energy generated, as well as the approximate cost of this production. As a result, our program encourages more effective budgeting in order to produce a greater amount of renewable energy.</p>
+        <p id="product-description-paragraph">We offer an innovative solution to the issue of costly energy production
+          mechanisms generating low outputs due to weather conditions. Our product analyzes the weather conditions and
+          predicts the amount of renewable energy generated, as well as the approximate cost of this production. As a
+          result, our program encourages more effective budgeting in order to produce a greater amount of renewable
+          energy.</p>
       </div>
 
       <div class="image-container" id="image1">
       </div>
 
       <div id="product-test">
-        <p id="product-test-words">Try our product out here!</p>
+        <p id="product-test-words">Try our product out here! <br>The left output represents the price of energy generation,
+          and the right value represents the amount of renewable energy generated given these weather conditions.</p>
         <form class="form">
           <input type="text" id="temp" name="temp" placeholder="Temperature (K)" required><br><br>
           <input type="text" id="pressure" name="pressure" placeholder="Pressure" required><br><br>
@@ -94,16 +105,24 @@
           <input type="text" id="rain_1h" name="rain_1h" placeholder="Rain in the Last 1 Hour" required><br><br>
           <input type="text" id="rain_3h" name="rain_3h" placeholder="Rain in the Last 3 Hours" required><br><br>
           <input type="text" id="snow_3h" name="snow_3h" placeholder="Snow in the Last 3 Hours" required><br><br>
-          <input type="text" id="clouds_all" name="clouds_all" placeholder="Clouds in the Last 3 Hours" required><br><br>\
-          <button class="button" onclick="predict(model)">Predict</button>
+          <input type="text" id="clouds_all" name="clouds_all" placeholder="Cloud coverage" required><br><br>
+          <center><button onclick="predict(model)" type="button">Predict</button></center><br>
+          <center><input id="answer"></center><br>
+
         </form>
+
       </div>
 
       <div class="image-container" id="image2">
       </div>
-      
+
       <div id="how-it-works">
-        <p id="how-it-works-paragraph">Our product works through a neural network run in Tensorflow. Using both weather data and energy generation, we identified the renewable energy generated and the price point for the energy output.</p>
+        <p id="how-it-works-paragraph">Our product works through a neural network run in Tensorflow. The neural network
+          utilizes
+          weather and energy generation data in order to identify daily renewable energy generated and the price point
+          for the energy
+          output in pounds per megawatt. Users can input their data into the model above to determine renewable energy
+          generation and cost per hour.</p>
       </div>
 
       <div class="image-container" id="image3">
@@ -116,6 +135,6 @@
 <footer>
   <div class="footer-holder">
     <p class="footer-text">Created by Siddhant Vashist and Pragya Singh.</p>
-    <p class="footer-text" >2022</p>
+    <p class="footer-text">2022</p>
   </div>
 </footer>
