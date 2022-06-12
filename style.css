@@ -1,0 +1,176 @@
+.img-title {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  background-image: url(https://cdn.discordapp.com/attachments/824341195991810060/985384381914939462/sean-oulashin-KMn4VEeEPR8-unsplash.jpg);
+  height: 70vh;
+  width: 99vw;
+  margin: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+p {
+  font-family: Calibri, sans-serif;
+}
+
+.title-line {
+  grid-column: 3 / 14;
+  grid-row: 4 / 9;
+}
+
+#title {
+  font-family: Cinzel, sans-serif;
+  font-size: 92px;
+  font-weight: 50;
+  letter-spacing: 0.1rem;
+}
+
+#info {
+  font-family: Lato, sans-serif;
+  font-size: 24px;
+  font-weight: 13;
+  letter-spacing: .4rem;
+}
+
+#product-description {
+  font-family: Calibri, Roboto, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+}
+
+#product-description-paragraph {
+  grid-column: 5 / 12;
+  padding: 160px 0px;
+  font-size: 18px;
+  line-height: 3rem;
+}
+
+.image-container {
+  height: 400px;
+  background-color: grey;
+}
+
+#image1 {
+  background-image: url(https://cdn.discordapp.com/attachments/824341195991810060/985388399676522547/shifaaz-shamoon-oR0uERTVyD0-unsplash.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+#product-test {
+  height: 900px;
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-columns: repeat(16, 1fr);
+}
+
+#product-test-words {
+  text-align: center;
+  grid-row-start: 3;
+  grid-column: 6 / 12;
+  font-family: Calibri, sans-serif;
+  font-size: 18px;
+  line-height: 3rem;
+  padding: 35px 0px;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: Calibri, sans-serif;
+  font-size: 14px;
+}
+
+.form {
+  grid-row-start: 5;
+  justify-items: center;
+  grid-column: 8 / 10;
+}
+
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid skyblue;
+  padding: 10px;
+  font-size: 17px;
+  width: 200px;
+}
+
+button {
+  transition-duration: 0.4s;
+  width: 220px;
+  height: 50px;
+  border: black;
+  border-radius: 11%;
+  background-color: white;
+  align-self: center;
+  align-items: center;
+}
+
+button:hover {
+  background-color: skyblue;
+  /* Green */
+  color: white;
+}
+
+#image2 {
+  background-image: url(https://cdn.discordapp.com/attachments/824341195991810060/985605865832849479/paul-pastourmatzis-KT3WlrL_bsg-unsplash_1.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#how-it-works {
+  height: 700px;
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  font-family: Calibri, Roboto, sans-serif;
+  grid-template-columns: repeat(16, 1fr);
+}
+
+#how-it-works-paragraph {
+  grid-row-start: 4;
+  font-family: Calibri, sans-serif;
+  grid-column: 5 / 12;
+  padding: 200px 0px;
+  font-size: 18px;
+  line-height: 3rem;
+}
+
+.footer-holder {
+  height: 300px;
+  margin-top: 15px;
+  background-color: navy;
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.footer-text {
+  color: white;
+  font-family: Calibri, sans-serif;
+  text-align: center;
+  grid-row-start: 4;
+}
+
+#image3 {
+  background-image: url(https://cdn.discordapp.com/attachments/824341195991810060/985606399616761906/simon-berger-FFLGD4o149E-unsplash.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.a {
+  opacity: 0%;
+}
+
+.a:click {
+  opacity: 100%;
+}
+
+#answer {
+  width: 220px;
+  height: 80px;
+  border-color: skyblue;
+  border: none;
+  border-bottom: skyblue;
+}
