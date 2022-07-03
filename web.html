@@ -25,7 +25,20 @@
   <link rel="stylesheet" href="styles.css">
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
 
+  <style>
+    svg rect {
+        fill: skyblue;
+        margin: 100px
+    }
+  
+    svg text {
+        fill:black;
+        font: 11px sans-serif;
+        text-anchor: end;
+    }
+  </style>
 
   <script>
     async function load() {
@@ -59,11 +72,111 @@
 
       // now lets make the prediction 
       model.then(model => {
+        var costest = 0
         let result = model.predict(tf.tensor([[temp, pressure, humidity, wind_speed, rain_1h, rain_3h, snow_3h, clouds_all]]));  // make prediction
         //alert(result); creates pop-up
-        document.getElementById("answer").value = result;
+        const values = result.dataSync();
+        const arr = Array.from(values)
+        if(arr[0]-57.87 > 0){
+          var costest = (Math.round((arr[0] - 57.87)*100)/100) + " over"
+        } else{
+          var costest = (Math.round((57.87-arr[0])*100)/100) + " under"
+        }
+        if(arr[1]-11688.96 > 0){
+          var enest = (Math.round((arr[1] - 11688.96)*100)/100) + " over"
+          var ver = "overhaul"
+        } else{
+          var enest = (Math.round((11688.96-arr[1])*100)/100) + " under"
+          var ver = "underhaul"
+        }
+        
+        
+        
+        d3.selectAll("svg > *").remove()
+        document.getElementById("daily_cost").value = "$" + (Math.round(arr[0] * 100) / 100);
+        document.getElementById("total_energy").value = (Math.round(arr[1] * 100) / 100) + "MW";
+        document.getElementById("cost_estimate").value = costest;
+        document.getElementById("energy_estimate").value = enest;
+        var data = [(Math.round(arr[0] * 100) / 100), 57.87]
+        var width = 800,
+        scaleFactor = 4,
+        barHeight = 60;
+        var graph = d3.select("label")
+                  .append("svg")
+                  .attr("width", width)
+                  .attr("height", barHeight * data.length)
+                  .attr("transform","translate(-100 , 50)")
+        var bar = graph.selectAll("g")
+                  .data(data)
+                  .enter()
+                  .append("g")
+                  .attr("transform", function(d, i) {
+                        return "translate(0," + i * barHeight + ")"
+                  });
+
+    bar.append("rect")
+       .attr("width", function(d) {
+                return d * scaleFactor;
+       })
+       .attr("height", barHeight - 1);
+
+    bar.append("text")
+       .attr("x", function(d) { return (d*scaleFactor); })
+       .attr("y", barHeight / 2)
+       .attr("dy", ".35em")
+       .text(function(d) { return d; });
+       
+       var scale = d3.scaleLinear().domain([0, 100]).range([0, 400]);
+       var axis = d3.axisBottom(scale).tickFormat(function(d){
+             return "$" + d;
+       })
+
+    graph.append("g")
+      .call(axis)
+       
+        var data = [(Math.round(arr[1] * 100) / 100), 11688.96]
+        var width = 800,
+        scaleFactor = 0.024,
+        barHeight = 60;
+
+
+        var graph = d3.select("label")
+                  .append("svg")
+                  .attr("width", width)
+                  .attr("height", barHeight * data.length)
+                  .attr("transform","translate(-100 , 80)")
+
+        var bar = graph.selectAll("g")
+                  .data(data)
+                  .enter()
+                  .append("g")
+                  .attr("transform", function(d, i) {
+                        return "translate(0," + i * barHeight + ")";
+                  });
+
+    bar.append("rect")
+       .attr("width", function(d) {
+                return d * scaleFactor;
+       })
+       .attr("height", barHeight - 1);
+
+    bar.append("text")
+       .attr("x", function(d) { return (d*scaleFactor); })
+       .attr("y", barHeight / 2)
+       .attr("dy", ".35em")
+       .text(function(d) { return d; });
+         // creates pop-up
+      
+      var scale = d3.scaleLinear().domain([0, 15000]).range([0, 400]);
+      var axis = d3.axisBottom(scale).tickFormat(function(d){
+             return d + "MW";
+       }).ticks(4)
+    
+    graph.append("g")
+       .call(axis)
       });
     };
+
 
     const model = load();
   </script>
@@ -95,7 +208,8 @@
       </div>
 
       <div id="product-test">
-        <p id="product-test-words">Try our product out here! <br>The left output represents the price of energy generation,
+        <p id="product-test-words">Try our product out here! <br>The left output represents the price of energy
+          generation,
           and the right value represents the amount of renewable energy generated given these weather conditions.</p>
         <form class="form">
           <input type="text" id="temp" name="temp" placeholder="Temperature (K)" required><br><br>
@@ -107,9 +221,23 @@
           <input type="text" id="snow_3h" name="snow_3h" placeholder="Snow in the Last 3 Hours" required><br><br>
           <input type="text" id="clouds_all" name="clouds_all" placeholder="Cloud coverage" required><br><br>
           <center><button onclick="predict(model)" type="button">Predict</button></center><br>
-          <center><input id="answer"></center><br>
-
+          <center><label for="among_us" class="label">Graphs:</label></center>
+          <br><br>
+          <br><br>
+          <br><br>
+          <center><label for="daily_cost" class="label">Predicted hourly cost of energy (in USD) per capita:</label></center>
+          <center><input id="daily_cost"></center><br>
+          <center><label for="total_energy" class="label">Predicted amount of renewable energy produced (in MW) per capita:</label></center>
+          <center><input id="total_energy"></center><br>
+          <center><label for="cost_estimate" class="label">Cost deviation:</label></center>
+          <center><input id="cost_estimate"></center><br>
+          <center><label for="energy_estimate" class="label">Here is the energy deviation:</label></center>
+          <center><input id="energy_estimate"></center><br>
+          <br><br>
+          <br><br>
+          <br><br>
         </form>
+    
 
       </div>
 
@@ -134,7 +262,7 @@
 </body>
 <footer>
   <div class="footer-holder">
-    <p class="footer-text">Created by Siddhant Vashist and Pragya Singh.</p>
+    <p class="footer-text">Created by Siddhant Vashisht and Pragya Singh.</p>
     <p class="footer-text">2022</p>
   </div>
 </footer>
