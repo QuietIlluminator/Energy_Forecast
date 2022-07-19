@@ -208,9 +208,8 @@
       </div>
 
       <div id="product-test">
-        <p id="product-test-words">Try our product out here! <br>The left output represents the price of energy
-          generation,
-          and the right value represents the amount of renewable energy generated given these weather conditions.</p>
+        <p id="product-test-words">Try our product out here! <br>The top graph compares the predicted cost of energy generation (upper value) to the hourly average cost (lower value). <br>
+          The bottom graph compares the predicted amount renewable energy produced (upper value) to the hourly average amount produced (lower value).</p>
         <form class="form">
           <input type="text" id="temp" name="temp" placeholder="Temperature (K)" required><br><br>
           <input type="text" id="pressure" name="pressure" placeholder="Pressure" required><br><br>
@@ -221,7 +220,7 @@
           <input type="text" id="snow_3h" name="snow_3h" placeholder="Snow in the Last 3 Hours" required><br><br>
           <input type="text" id="clouds_all" name="clouds_all" placeholder="Cloud coverage" required><br><br>
           <center><button onclick="predict(model)" type="button">Predict</button></center><br>
-          <center><label for="among_us" class="label">Graphs:</label></center>
+          <center><label for="graph" class="label">Graphs:</label></center>
           <br><br>
           <br><br>
           <br><br>
@@ -231,7 +230,7 @@
           <center><input id="total_energy"></center><br>
           <center><label for="cost_estimate" class="label">Cost deviation:</label></center>
           <center><input id="cost_estimate"></center><br>
-          <center><label for="energy_estimate" class="label">Here is the energy deviation:</label></center>
+          <center><label for="energy_estimate" class="label">Energy deviation:</label></center>
           <center><input id="energy_estimate"></center><br>
           <br><br>
           <br><br>
