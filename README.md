@@ -10,3 +10,5 @@ After the neural network is created, it will be saved as a .h5 file in your loca
 Once the neural network is saved and converted, the neural network should be integrated into the website and the site should be able to run. 
 
 Our website can only be run as a local web server at the moment. Going into the future, we want to set up a proper server in order to make out website public.
+
+Made by Pragya Singh and Siddhant Vashisht
